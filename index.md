@@ -22,7 +22,7 @@ I'm a final-year Electronics and Communication Engineering student passionate ab
 
 Currently reading *Fundamentals of Applied Electromagnetics* by Ulaby and prepping for my MS at **UT Austin**.
 
-[Explore Blog Posts](./_posts) | [Visit Portfolio](https://sahithya2003.vercel.app/)
+[Explore Blog Posts]({{ "/blog/" | relative_url }}) | [Visit Portfolio](https://sahithya2003.vercel.app/)
 
 ---
 
