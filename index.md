@@ -1,19 +1,44 @@
 ---
-layout: home
-title: "Home"
+layout: splash
+title: "Welcome to My RF Journey"
+header:
+  overlay_color: "#000"
+  overlay_filter: "0.5"
+  overlay_image: /assets/images/space_banner.png
+  actions:
+    - label: "View My Projects"
+      url: "/_posts/"
+excerpt: "RF, Space & Electromagnetics • Grad Prep Blog"
+intro: 
+  - excerpt: "Exploring the invisible world of fields and waves."
 ---
 
-# 👋 Welcome to My RF Journey
+# 👋 Hi, I'm Sahithya
 
-This blog documents my learning and projects in:
+I'm a final-year Electronics and Communication Engineering student passionate about:
 - RF & Microwave Engineering
-- Antenna Design
-- Satellite Communication
-- Space Internet Systems
+- Antenna Design & Electromagnetic Simulation
+- Satellite Communication & Space Internet Systems
 
-I’m reading *Fundamentals of Applied Electromagnetics* by Ulaby and preparing for my grad journey at UT Austin.
+Currently reading *Fundamentals of Applied Electromagnetics* by Ulaby and prepping for my MS at **UT Austin**.
 
-### 📚 Latest Posts
-{% for post in site.posts %}
-- [{{ post.title }}]({{ post.url }})
+[Explore Blog Posts](./_posts) | [Visit Portfolio](https://sahithya2003.vercel.app/)
+
+---
+
+### 📷 About Me
+
+<img src="/assets/images/profile_pic.png" width="180" style="border-radius: 50%; float: left; margin-right: 20px;"/>
+
+I enjoy working on applied research in wireless systems and electromagnetics. My interests lie in signal propagation, antenna systems, satellite-based internet, and next-gen RF technologies.
+
+Connect with me on [LinkedIn](https://linkedin.com/in/sahithya-kattamuri) or explore my [resume](https://sahithya2003.vercel.app/).
+
+---
+
+### 🧪 Blog Highlights
+
+{% for post in site.posts limit:3 %}
+- [{{ post.title }}]({{ post.url }})  
+  _{{ post.date | date: "%B %d, %Y" }}_
 {% endfor %}
