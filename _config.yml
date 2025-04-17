@@ -1,6 +1,45 @@
-title: "My RF + Space Journey"
-description: "A blog tracking my prep in applied electromagnetics, RF design, and satellite communication before UT Austin."
-theme: minima
-author: Sahithya Kattamuri
-baseurl: ""
-url: "https://Sahithya2003.github.io/RF_blog"
+title: "My RF + Space Blog"
+description: "Tracking my journey through electromagnetics, RF design, antennas, and satellite comm before UT Austin."
+theme: minimal-mistakes-jekyll
+minimal_mistakes_skin: default
+url: "https://Sahithya2003.github.io"
+baseurl: "/RF_blog"
+repository: "Sahithya2003/RF_blog"
+
+author:
+  name: "Sahithya Kattamuri"
+  avatar: "/assets/images/profile.jpg"
+  bio: "EM/RF enthusiast | MS ECE @ UT Austin (Fall '25)"
+  location: "USA"
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-paginate
+  - jekyll-include-cache
+  - jekyll-archives
+
+paginate: 5
+paginate_path: /page:num/
+
+collections:
+  posts:
+    output: true
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  math_engine: mathjax
+  syntax_highlighter: rouge
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: single
+      author_profile: true
+      read_time: true
+      comments: false
+      share: true
