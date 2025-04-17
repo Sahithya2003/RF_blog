@@ -39,6 +39,6 @@ Connect with me on [LinkedIn](https://linkedin.com/in/sahithya-kattamuri) or exp
 ### 🧪 Blog Highlights
 
 {% for post in site.posts limit:3 %}
-- [{{ post.title }}]({{ post.url }})  
+- [{{ post.title }}]({{ post.url | relative_url }})
   _{{ post.date | date: "%B %d, %Y" }}_
 {% endfor %}
