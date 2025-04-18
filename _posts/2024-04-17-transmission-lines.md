@@ -10,17 +10,17 @@ toc: true
 
 ![Transmission Line Model](/RF_blog/assets/images/transmission_line_model.jpg)
 
-
 Any wire that transfers energy is essentially a **transmission line**. In RF and microwave systems, this line becomes more than a passive connector — it’s an active player in shaping signals.
 
 A **transmission line** is a two-port network: one port connected to a **source/generator**, and the other to a **load**.
 
 ---
+
 ### What is a Lumped Circuit?
 
 In lumped circuit models, we assume that electrical components like resistors, capacitors, and inductors are concentrated at single points. The key assumptions are:
 
-- There is no time delay across components or wires
+- There is no time delay across components or wires  
 - Voltage and current are uniform at every point in the circuit
 
 This model works well when the size of the circuit is much smaller than the wavelength of the signal — which is usually the case at low frequencies.
@@ -52,15 +52,15 @@ Let’s take a simple example:
 
 - Frequency \( f = 1\,\text{kHz} \)  
 - Wire length \( l = 5\,\text{cm} \)  
-- Signal at source: \( V_\text{source}(t) = V_0 \cos(\omega t) \)  
-- Signal at load: \( V_\text{load}(t) = V_0 \cos(\omega (t - \frac{l}{c})) \)  
+- Signal at source: \( V_{\text{source}}(t) = V_0 \cos(\omega t) \)  
+- Signal at load: \( V_{\text{load}}(t) = V_0 \cos(\omega (t - \frac{l}{c})) \)
 
 Here, \( \frac{l}{c} \) is the time delay due to wave propagation.
 
 At 1 kHz, this delay is very small, so:
 
 \[
-V_\text{load}(t) \approx V_0 \cos(\omega t - \phi) \approx 0.99 V_0
+V_{\text{load}}(t) \approx V_0 \cos(\omega t - \phi) \approx 0.99 V_0
 \]
 
 The phase shift \( \phi = \omega \cdot \frac{l}{c} \) is so small that it can be ignored — so simple wires still work fine.
