@@ -6,7 +6,9 @@ permalink: /transmission-lines
 author_profile: true
 read_time: true
 toc: true
+math: true  
 ---
+
 
 ![Transmission Line Model](/RF_blog/assets/images/transmission_line_model.jpg)
 
