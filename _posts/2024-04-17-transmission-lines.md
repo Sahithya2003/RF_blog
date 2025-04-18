@@ -8,7 +8,7 @@ read_time: true
 toc: true
 ---
 
-![Transmission Line Model](/assets/images/transmission_line_model.jpg)
+![Transmission Line Model](/RF_blog/assets/images/transmission_line_model.jpg)
 
 
 Any wire that transfers energy is essentially a **transmission line**. In RF and microwave systems, this line becomes more than a passive connector — it’s an active player in shaping signals.
@@ -29,7 +29,7 @@ This model works well when the size of the circuit is much smaller than the wave
 - **L** – The inductance of both conductors  
 - **G** – The conductance of the insulating medium between them  
 - **C** – The capacitance between the two conductors  
-![Lumped Element Model](/assets/images/lumped_model.jpg)
+![Lumped Element Model](/RF_blog/assets/images/lumped_model.jpg)
 
 ---
 
