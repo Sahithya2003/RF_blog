@@ -52,10 +52,10 @@ The assumptions of lumped circuits no longer hold, and we begin to see effects l
 
 Let’s take a simple example:
 
-- Frequency $f = 1\,\text{kHz}$
-- Wire length $l = 5\,\text{cm}$
-- Source: $V_{\text{source}}(t) = V_0 \cos(\omega t)$
-- Load: $V_{\text{load}}(t) = V_0 \cos(\omega (t - \frac{l}{c}))$
+- Frequency $f = 1\,\mathrm{kHz}$
+- Wire length $l = 5\,\mathrm{cm}$
+- Source: $V_{\mathrm{source}}(t) = V_0 \cos(\omega t)$
+- Load: $V_{\mathrm{load}}(t) = V_0 \cos(\omega (t - \frac{l}{c}))$
 
 Here, $\frac{l}{c}$ is the time delay due to wave propagation.
 
@@ -65,7 +65,7 @@ $$
 V_{\text{load}}(t) \approx V_0 \cos(\omega t - \phi) \approx 0.99 V_0
 $$
 
-The phase shift $\phi = \omega \cdot \frac{l}{c}$ is very small that it can be ignored — so simple wires still work fine.
+The phase shift $$\phi = \omega \cdot \frac{l}{c}$$ is very small that it can be ignored — so simple wires still work fine.
 
 But as frequency increases, this delay becomes significant, and the voltage at the load can differ a lot from the source — leading to distortion.
 
