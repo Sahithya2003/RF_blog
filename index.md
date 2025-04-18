@@ -4,7 +4,7 @@ title: "Welcome to My RF Journey"
 header:
   overlay_color: "#000"
   overlay_filter: "0.5"
-  overlay_image: /assets/images/space_banner.jpg
+  overlay_image: /RF_blog/assets/images/space_banner.jpg
 
 excerpt: "RF, Space & Electromagnetics • Grad Prep Blog"
 intro: 
@@ -26,7 +26,7 @@ Currently reading *Fundamentals of Applied Electromagnetics* by Ulaby and preppi
 
 ### 📷 About Me
 
-<img src="/assets/images/profile_pic.png" width="180" style="border-radius: 50%; float: left; margin-right: 20px;"/>
+<img src="/RF_blog/assets/images/profile_pic.jpg" width="180" style="border-radius: 50%; float: left; margin-right: 20px;"/>
 
 I enjoy working on applied research in wireless systems and electromagnetics. My interests lie in signal propagation, antenna systems, satellite-based internet, and next-gen RF technologies.
 
