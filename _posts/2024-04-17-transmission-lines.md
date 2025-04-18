@@ -82,3 +82,7 @@ This is why signal integrity becomes such a big concern in high-speed digital an
 ### Summary
 
 Lumped circuit models are great for low-frequency electronics, but they break down at high frequencies where time delay, reflections, and distributed effects become significant. Transmission line theory is essential to accurately describe and design systems that operate in these conditions.
+<script type="text/javascript" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
