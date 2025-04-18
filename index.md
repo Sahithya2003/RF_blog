@@ -5,9 +5,7 @@ header:
   overlay_color: "#000"
   overlay_filter: "0.5"
   overlay_image: /assets/images/space_banner.png
-  actions:
-    - label: "View My Projects"
-      url: "/_posts/"
+
 excerpt: "RF, Space & Electromagnetics • Grad Prep Blog"
 intro: 
   - excerpt: "Exploring the invisible world of fields and waves."
