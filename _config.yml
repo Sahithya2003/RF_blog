@@ -6,9 +6,10 @@ remote_theme: mmistakes/minimal-mistakes
 # Author info
 author:
   name: "Sahithya Kattamuri"
-  avatar: "/RF_blog/assets/images/profile_pic.jpg"
+  avatar: "{{ site.baseurl }}/assets/images/profile_pic.png"
   bio: "EM/RF enthusiast | MS ECE @ UT Austin (Fall '25)"
   location: "USA"
+
 
 # Site base URL and repository
 url: "https://Sahithya2003.github.io"
