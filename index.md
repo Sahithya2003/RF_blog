@@ -4,7 +4,7 @@ title: "Welcome to My RF Journey"
 header:
   overlay_color: "#000"
   overlay_filter: "0.5"
-  overlay_image: "{{ site.baseurl }}/assets/images/space_banner.jpg"
+  overlay_image: /assets/images/space_banner.jpg
 excerpt: "RF, Space & Electromagnetics • Grad Prep Blog"
 intro:
   - excerpt: "Exploring the invisible world of fields and waves."
