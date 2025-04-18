@@ -4,11 +4,12 @@ title: "Welcome to My RF Journey"
 header:
   overlay_color: "#000"
   overlay_filter: "0.5"
- overlay_image: /RF_blog/assets/images/space_banner.jpg
+  overlay_image: "{{ site.baseurl }}/assets/images/space_banner.jpg"
 excerpt: "RF, Space & Electromagnetics • Grad Prep Blog"
-intro: 
+intro:
   - excerpt: "Exploring the invisible world of fields and waves."
 ---
+
 
 # 👋 Hi, I'm Sahithya
 
