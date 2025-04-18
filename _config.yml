@@ -1,6 +1,7 @@
 title: "My RF + Space Blog"
 description: "Tracking my journey through electromagnetics, RF design, antennas, and satellite comm before UT Austin."
 remote_theme: mmistakes/minimal-mistakes
+baseurl: "/RF_blog"
 
 # Author info
 author:
