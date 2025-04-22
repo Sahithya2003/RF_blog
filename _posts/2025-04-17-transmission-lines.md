@@ -1,7 +1,7 @@
 ---
 layout: single
 title: "Why Lumped Circuits Fail at High Frequencies – An Introduction to Transmission Lines"
-date: 2024-04-17
+date: 2025-04-17
 permalink: /transmission-lines
 author_profile: true
 read_time: true
