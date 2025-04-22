@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Interactive Curl Field</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+  </head>
+  <body>
+    <script>
+      let spacing = 40;
+
+      function setup() {
+        createCanvas(400, 400);
+      }
+
+      function draw() {
+        background(255);
+        stroke(0);
+        translate(width / 2, height / 2);
+        for (let x = -width / 2; x < width / 2; x += spacing) {
+          for (let y = -height / 2; y < height / 2; y += spacing) {
+            let angle = atan2(y, x) + frameCount * 0.02;
+            let len = 15;
+            let dx = len * cos(angle);
+            let dy = len * sin(angle);
+            line(x, y, x + dx, y + dy);
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
