@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Interactive EM Wave Visualization</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+  </head>
+  <body>
+    <script>
+      let t = 0;
+
+      function setup() {
+        createCanvas(620, 300);
+      }
+
+      function draw() {
+        background(255);
+        strokeWeight(2);
+        translate(0, height / 2);
+
+        // Draw Axes
+        stroke(180);
+        line(0, 0, width, 0);
+
+        // E-field (vertical)
+        stroke(255, 0, 0); // Red for E
+        noFill();
+        beginShape();
+        for (let x = 0; x < width; x++) {
+          let angle = (x + t) * 0.05;
+          let y = -50 * sin(angle);
+          vertex(x, y);
+        }
+        endShape();
+
+        // B-field (horizontal, offset down)
+        stroke(0, 0, 255); // Blue for B
+        noFill();
+        beginShape();
+        for (let x = 0; x < width; x++) {
+          let angle = (x + t) * 0.05;
+          let y = 50 * cos(angle);
+          vertex(x, y + 100);  // shifted down for clarity
+        }
+        endShape();
+
+        // Labels
+        noStroke();
+        fill(255, 0, 0);
+        text("E-field (⟂ to direction)", 10, -60);
+        fill(0, 0, 255);
+        text("B-field (⟂ to E & direction)", 10, 130);
+        fill(0);
+        text("→ Wave Propagation", width - 160, 15);
+        
+        t += 2;
+      }
+    </script>
+  </body>
+</html>
