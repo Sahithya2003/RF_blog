@@ -8,6 +8,29 @@ read_time: true
 toc: true
 math: true  
 ---
+<style>
+body {
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+h1 {
+  font-size: 2.2em;
+}
+
+h2 {
+  font-size: 1.9em;
+}
+
+h3 {
+  font-size: 1.6em;
+}
+
+iframe {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+</style>
 
 
 ![Transmission Line Model](/RF_blog/assets/images/transmission_line_model.jpg)
