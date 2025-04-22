@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Gauss's Law for Magnetism</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+  </head>
+  <body>
+    <script>
+      let t = 0;
+
+      function setup() {
+        createCanvas(600, 400);
+        textAlign(CENTER, CENTER);
+        textSize(14);
+      }
+
+      function draw() {
+        background(255);
+        translate(width / 2, height / 2);
+
+        // Draw bar magnet
+        fill(200);
+        rectMode(CENTER);
+        rect(0, 0, 120, 40);
+        fill('red');
+        text("N", -50, 0);
+        fill('blue');
+        text("S", 50, 0);
+
+        // Draw magnetic field lines as animated loops
+        noFill();
+        stroke(0, 100, 255);
+        for (let i = -1; i <= 1; i++) {
+          beginShape();
+          for (let angle = 0; angle < TWO_PI; angle += 0.1) {
+            let r = 60 + 20 * i + 5 * sin(t * 0.05 + angle * 2);
+            let x = r * cos(angle);
+            let y = r * sin(angle);
+            vertex(x, y);
+          }
+          endShape(CLOSE);
+        }
+
+        // Labels
+        noStroke();
+        fill(0);
+        text("Gauss’s Law for Magnetism — No Start or End to Magnetic Field Lines", 0, -160);
+
+        t++;
+      }
+    </script>
+  </body>
+</html>

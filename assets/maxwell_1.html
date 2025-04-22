@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Interactive Gauss's Law (Electric Field)</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+  </head>
+  <body>
+    <script>
+      let charge = 1; // +1 for positive, -1 for negative
+
+      function setup() {
+        createCanvas(500, 500);
+        textAlign(CENTER, CENTER);
+        let btn = createButton("Toggle Charge Polarity");
+        btn.position(10, height + 10);
+        btn.mousePressed(() => {
+          charge *= -1;
+        });
+      }
+
+      function draw() {
+        background(255);
+        translate(width / 2, height / 2);
+
+        // Draw the point charge
+        fill(charge > 0 ? 'red' : 'blue');
+        noStroke();
+        ellipse(0, 0, 30, 30);
+        fill(255);
+        textSize(16);
+        text(charge > 0 ? "+" : "−", 0, 1);
+
+        // Draw field lines
+        stroke(charge > 0 ? 'red' : 'blue');
+        for (let a = 0; a < TWO_PI; a += PI / 12) {
+          let x1 = cos(a) * 20;
+          let y1 = sin(a) * 20;
+          let x2 = cos(a) * 180;
+          let y2 = sin(a) * 180;
+          line(x1, y1, x2, y2);
+
+          // Arrowhead
+          let ahx = cos(a) * 160;
+          let ahy = sin(a) * 160;
+          push();
+          translate(ahx, ahy);
+          rotate(a);
+          triangle(0, 0, -5 * charge, -5, -5 * charge, 5);
+          pop();
+        }
+
+        // Title
+        noStroke();
+        fill(0);
+        textSize(14);
+        text("Gauss’s Law — Electric Field Around a Point Charge", 0, -220);
+      }
+    </script>
+  </body>
+</html>

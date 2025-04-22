@@ -1,0 +1,141 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Faraday's Law with Ammeter</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+  </head>
+  <body>
+    <script>
+      let t = 0;
+      let magnetX = -250;
+      let prevMagnetX = magnetX;
+      let dragging = false;
+      let direction = 0;
+      let inducing = false;
+      let inducedTimer = 0;
+      let needleAngle = 0;
+
+      function setup() {
+        createCanvas(700, 500, WEBGL);
+      }
+
+      function draw() {
+        background(255);
+        rotateY(PI / 6);
+        rotateX(PI / 10);
+        orbitControl();
+
+        // Axes
+        stroke(200);
+        line(-300, 0, 0, 300, 0, 0);
+        line(0, -200, 0, 0, 200, 0);
+        line(0, 0, -200, 0, 0, 200);
+
+        // Coil
+        noFill();
+        stroke(0);
+        let turns = 20;
+        for (let i = 0; i < turns; i++) {
+          beginShape();
+          for (let a = 0; a < TWO_PI; a += 0.1) {
+            let y = 40 * cos(a);
+            let z = 40 * sin(a);
+            let x = map(i, 0, turns, -50, 50);
+            vertex(x, y, z);
+          }
+          endShape();
+        }
+
+        // Magnet
+        push();
+        translate(magnetX, 0, 0);
+        fill("red");
+        box(60, 20, 20);
+        fill(255);
+        text("N", 0, 0);
+        pop();
+
+        // Induced current logic
+        let delta = magnetX - prevMagnetX;
+        let inRange = abs(magnetX) < 100;
+
+        if (inRange && abs(delta) > 0.5) {
+          inducing = true;
+          direction = delta > 0 ? 1 : -1;
+          inducedTimer = 20;
+        } else {
+          inducedTimer--;
+          if (inducedTimer <= 0) inducing = false;
+        }
+
+        if (inducing) {
+          stroke(direction > 0 ? "green" : "orange");
+          noFill();
+          beginShape();
+          for (let a = 0; a < TWO_PI * 2; a += 0.1) {
+            let r = 50;
+            let y = r * cos(a);
+            let z = r * sin(a);
+            let x = sin(a * 2 + t * 0.1 * direction) * 10;
+            vertex(x, y, z);
+          }
+          endShape();
+        }
+
+        // Ammeter (off to the left side of the coil)
+        push();
+        translate(-120, 0, 0);
+        rotateZ(HALF_PI);
+        fill(255);
+        stroke(0);
+        ellipse(0, 0, 80, 80);
+        fill(0);
+        textSize(12);
+        textAlign(CENTER, CENTER);
+        text("A", 0, 0);
+
+        // Needle rotation
+        if (inducing) {
+          needleAngle = (direction * PI) / 6;
+        } else {
+          needleAngle *= 0.9; // smooth decay
+        }
+
+        strokeWeight(3);
+        stroke(direction > 0 ? "green" : direction < 0 ? "orange" : 0);
+        line(0, 0, 40 * cos(needleAngle), 40 * sin(needleAngle));
+        strokeWeight(1);
+        pop();
+
+        // Title
+        resetMatrix();
+        camera();
+        textAlign(CENTER);
+        textSize(16);
+        fill(0);
+        text(
+          "Faraday’s Law — Induced Current and Ammeter Response",
+          width / 2,
+          30
+        );
+
+        t++;
+        prevMagnetX = magnetX;
+      }
+
+      function mousePressed() {
+        dragging = true;
+      }
+
+      function mouseDragged() {
+        if (dragging) {
+          magnetX = mouseX - width / 2;
+        }
+      }
+
+      function mouseReleased() {
+        dragging = false;
+      }
+    </script>
+  </body>
+</html>
