@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Interactive Divergence Field</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+  </head>
+  <body>
+    <script>
+      let charges = [];
+      let spacing = 25;
+
+      function setup() {
+        createCanvas(600, 600);
+        colorMode(HSB, 255);
+      }
+
+      function draw() {
+        background(0, 0, 255);
+        translate(width / 2, height / 2);
+
+        for (let x = -width / 2; x < width / 2; x += spacing) {
+          for (let y = -height / 2; y < height / 2; y += spacing) {
+            let field = createVector(0, 0);
+            for (let c of charges) {
+              let r = createVector(x - c.pos.x, y - c.pos.y);
+              let d = r.mag();
+              if (d > 5) {
+                r.normalize();
+                field.add(p5.Vector.mult(r, c.q / (d * d)));
+              }
+            }
+
+            let angle = field.heading();
+            let strength = field.mag();
+            let hue = map(strength, 0, 2, 0, 255);
+            stroke(hue, 255, 255);
+            push();
+            translate(x, y);
+            rotate(angle);
+            line(0, 0, 10, 0);
+            pop();
+          }
+        }
+
+        for (let c of charges) {
+          c.show();
+        }
+      }
+
+      function mousePressed() {
+        let mx = mouseX - width / 2;
+        let my = mouseY - height / 2;
+        let polarity = keyIsDown(SHIFT) ? -1 : 1;
+        charges.push(new Charge(mx, my, polarity));
+      }
+
+      class Charge {
+        constructor(x, y, q) {
+          this.pos = createVector(x, y);
+          this.q = q;
+          this.r = 15;
+        }
+
+        show() {
+          noStroke();
+          if (this.q > 0) fill(0, 255, 255);
+          else fill(170, 255, 255);
+          ellipse(this.pos.x, this.pos.y, this.r * 2);
+        }
+      }
+    </script>
+    <p style="text-align:center;">Click to add a positive charge. Shift + Click for a negative charge.</p>
+  </body>
+</html>
