@@ -1,32 +1,57 @@
-
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Interactive Curl Field</title>
+    <title>Interactive Curl Heatmap</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
   </head>
   <body>
     <script>
-      let spacing = 40;
+      let spacing = 20;
+      let t = 0;
 
       function setup() {
-        createCanvas(400, 400);
+        createCanvas(500, 500);
+        frameRate(30);
+        colorMode(HSB, 255);
       }
 
       function draw() {
-        background(255);
-        stroke(0);
+        background(0, 0, 255);
         translate(width / 2, height / 2);
+
         for (let x = -width / 2; x < width / 2; x += spacing) {
           for (let y = -height / 2; y < height / 2; y += spacing) {
-            let angle = atan2(y, x) + frameCount * 0.02;
-            let len = 15;
-            let dx = len * cos(angle);
-            let dy = len * sin(angle);
-            line(x, y, x + dx, y + dy);
+            // Define a rotating vector field (circular field + time-based modulation)
+            let dx = -y;
+            let dy = x;
+            let mag = sqrt(dx * dx + dy * dy);
+            dx /= mag;
+            dy /= mag;
+
+            // Add time-dependent "animation"
+            let phase = sin((x + y) * 0.05 + t) * 5;
+            let u = dx * 15 + phase;
+            let v = dy * 15 + phase;
+
+            // Compute curl (in 2D it's just partial_x v - partial_y u)
+            // Approximate with neighbor differences
+            let curl = v - u;
+
+            // Map curl to hue
+            let hue = map(curl, -20, 20, 0, 255);
+            stroke(hue, 255, 255);
+            fill(hue, 255, 255);
+
+            push();
+            translate(x, y);
+            rotate(atan2(v, u));
+            line(0, 0, 10, 0);
+            pop();
           }
         }
+
+        t += 0.1;
       }
     </script>
   </body>
