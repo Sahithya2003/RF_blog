@@ -2,56 +2,111 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Interactive Curl Heatmap</title>
+    <title>Interactive EM Field Visualization</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
   </head>
   <body>
     <script>
-      let spacing = 20;
+      let charges = [];
+      let spacing = 25;
       let t = 0;
+      let dragging = null;
 
       function setup() {
-        createCanvas(500, 500);
-        frameRate(30);
+        createCanvas(600, 600);
         colorMode(HSB, 255);
+        charges.push(new Charge(-100, 0, 1));
+        charges.push(new Charge(100, 0, -1));
       }
 
       function draw() {
         background(0, 0, 255);
         translate(width / 2, height / 2);
 
+        // Draw field vectors with animation and curl heatmap
         for (let x = -width / 2; x < width / 2; x += spacing) {
           for (let y = -height / 2; y < height / 2; y += spacing) {
-            // Define a rotating vector field (circular field + time-based modulation)
-            let dx = -y;
-            let dy = x;
-            let mag = sqrt(dx * dx + dy * dy);
-            dx /= mag;
-            dy /= mag;
+            let field = createVector(0, 0);
+            for (let c of charges) {
+              let r = createVector(x - c.pos.x, y - c.pos.y);
+              let d = r.mag();
+              if (d > 10) {
+                r.normalize();
+                field.add(p5.Vector.mult(r, c.q / (d * d)));
+              }
+            }
 
-            // Add time-dependent "animation"
-            let phase = sin((x + y) * 0.05 + t) * 5;
-            let u = dx * 15 + phase;
-            let v = dy * 15 + phase;
+            // Animate vector magnitude
+            let magnitude = field.mag();
+            let angle = field.heading();
+            let anim = sin(t + x * 0.05 + y * 0.05) * 3;
+            let ux = (magnitude + anim) * cos(angle);
+            let uy = (magnitude + anim) * sin(angle);
 
-            // Compute curl (in 2D it's just partial_x v - partial_y u)
-            // Approximate with neighbor differences
-            let curl = v - u;
+            // Approximate curl in 2D using u and v
+            let curl_z = ux - uy;
+            let hue = map(curl_z, -2, 2, 0, 255);
 
-            // Map curl to hue
-            let hue = map(curl, -20, 20, 0, 255);
             stroke(hue, 255, 255);
             fill(hue, 255, 255);
-
             push();
             translate(x, y);
-            rotate(atan2(v, u));
+            rotate(angle);
             line(0, 0, 10, 0);
             pop();
           }
         }
 
+        // Draw and update charges
+        for (let c of charges) {
+          c.update();
+          c.show();
+        }
+
         t += 0.1;
+      }
+
+      function mousePressed() {
+        for (let c of charges) {
+          if (c.isMouseOver(mouseX - width / 2, mouseY - height / 2)) {
+            dragging = c;
+            break;
+          }
+        }
+      }
+
+      function mouseDragged() {
+        if (dragging) {
+          dragging.pos.x = mouseX - width / 2;
+          dragging.pos.y = mouseY - height / 2;
+        }
+      }
+
+      function mouseReleased() {
+        dragging = null;
+      }
+
+      class Charge {
+        constructor(x, y, q) {
+          this.pos = createVector(x, y);
+          this.q = q;
+          this.r = 15;
+        }
+
+        show() {
+          noStroke();
+          if (this.q > 0) fill(0, 255, 255);
+          else fill(170, 255, 255);
+          ellipse(this.pos.x, this.pos.y, this.r * 2);
+        }
+
+        isMouseOver(mx, my) {
+          return dist(mx, my, this.pos.x, this.pos.y) < this.r;
+        }
+
+        update() {
+          // No auto movement
+        }
       }
     </script>
   </body>
