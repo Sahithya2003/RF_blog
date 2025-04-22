@@ -1,5 +1,14 @@
+---
+layout: single
+title: "Seeing the Invisible: Visualizing Divergence, Curl, and Maxwell’s Equations"
+date: 2025-04-22
+permalink: /transmission-lines
+author_profile: true
+read_time: true
+toc: true
+math: true  
+---
 
-# Seeing the Invisible: Visualizing Divergence, Curl, and Maxwell’s Equations
 
 Have you ever wondered how electric and magnetic fields behave — not just in theory, but in real space? Maxwell’s equations are the four elegant rules that describe all of classical electromagnetism, yet they often feel abstract. This blog aims to change that.  
 
