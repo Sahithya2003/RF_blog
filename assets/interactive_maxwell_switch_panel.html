@@ -1,11 +1,11 @@
-
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Maxwell's Equations Switch Panel</title>
+    <title>Maxwell's Equations Interactive Explorer</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
     <style>
+      body { font-family: sans-serif; }
       .controls {
         position: absolute;
         top: 10px;
@@ -14,9 +14,17 @@
       }
       .controls button {
         display: block;
-        margin-bottom: 4px;
+        margin-bottom: 6px;
         padding: 6px 12px;
         font-size: 14px;
+      }
+      #description {
+        margin-top: 420px;
+        padding: 12px;
+        max-width: 600px;
+        font-size: 15px;
+        background-color: #f7f7f7;
+        border-left: 4px solid #333;
       }
     </style>
   </head>
@@ -33,20 +41,34 @@
 
       function setMode(m) {
         mode = m;
+        let descBox = document.getElementById('description');
+        if (m === 'gaussE') {
+          descBox.innerHTML = `<b>Gauss’s Law (Electric)</b><br>
+          The red arrows represent electric field lines diverging from a positive charge.
+          This matches the equation ∇·E = ρ/ε₀, which tells us that electric fields radiate from positive charges.`;
+        } else if (m === 'gaussB') {
+          descBox.innerHTML = `<b>Gauss’s Law (Magnetic)</b><br>
+          The blue circles show magnetic field loops. Magnetic field lines never start or end – they always form closed loops.
+          This means ∇·B = 0 – there are no magnetic monopoles.`;
+        } else if (m === 'faraday') {
+          descBox.innerHTML = `<b>Faraday’s Law</b><br>
+          Red arrows curl over time to represent a circulating electric field.
+          This is what happens when a magnetic field changes with time: ∇×E = -∂B/∂t.`;
+        } else if (m === 'ampere') {
+          descBox.innerHTML = `<b>Ampère–Maxwell Law</b><br>
+          Blue arrows rotate in response to changing electric fields.
+          According to ∇×B = μ₀J + μ₀ε₀∂E/∂t, both current and changing electric fields create magnetic fields.`;
+        }
       }
 
       function setup() {
         createCanvas(600, 400);
+        setMode(mode);  // initialize description
       }
 
       function draw() {
         background(255);
         translate(width / 2, height / 2);
-        textSize(16);
-        fill(0);
-        textAlign(CENTER);
-        text("Mode: " + mode, 0, -170);
-
         let spacing = 40;
 
         for (let x = -width / 2 + 20; x < width / 2; x += spacing) {
@@ -80,5 +102,7 @@
         t += 1;
       }
     </script>
+
+    <div id="description"></div>
   </body>
 </html>
