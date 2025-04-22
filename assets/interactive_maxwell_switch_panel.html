@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Maxwell's Equations Switch Panel</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <style>
+      .controls {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        z-index: 10;
+      }
+      .controls button {
+        display: block;
+        margin-bottom: 4px;
+        padding: 6px 12px;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="controls">
+      <button onclick="setMode('gaussE')">Gauss's Law (Electric)</button>
+      <button onclick="setMode('gaussB')">Gauss's Law (Magnetic)</button>
+      <button onclick="setMode('faraday')">Faraday's Law</button>
+      <button onclick="setMode('ampere')">Ampère–Maxwell Law</button>
+    </div>
+    <script>
+      let mode = 'gaussE';
+      let t = 0;
+
+      function setMode(m) {
+        mode = m;
+      }
+
+      function setup() {
+        createCanvas(600, 400);
+      }
+
+      function draw() {
+        background(255);
+        translate(width / 2, height / 2);
+        textSize(16);
+        fill(0);
+        textAlign(CENTER);
+        text("Mode: " + mode, 0, -170);
+
+        let spacing = 40;
+
+        for (let x = -width / 2 + 20; x < width / 2; x += spacing) {
+          for (let y = -height / 2 + 20; y < height / 2; y += spacing) {
+            push();
+            translate(x, y);
+
+            if (mode === 'gaussE') {
+              let r = createVector(x, y);
+              r.normalize();
+              stroke(255, 0, 0);
+              line(0, 0, r.x * 10, r.y * 10);
+            } else if (mode === 'gaussB') {
+              stroke(0, 0, 255);
+              noFill();
+              ellipse(0, 0, 20, 20);
+            } else if (mode === 'faraday') {
+              let angle = atan2(y, x) + sin(t * 0.05 + x * 0.05 + y * 0.05);
+              stroke(255, 0, 0);
+              line(0, 0, cos(angle) * 10, sin(angle) * 10);
+            } else if (mode === 'ampere') {
+              let angle = atan2(y, x) + cos(t * 0.05 + x * 0.05 + y * 0.05);
+              stroke(0, 0, 255);
+              line(0, 0, cos(angle) * 10, sin(angle) * 10);
+            }
+
+            pop();
+          }
+        }
+
+        t += 1;
+      }
+    </script>
+  </body>
+</html>
