@@ -18,7 +18,7 @@ I'm a final-year Electronics and Communication Engineering student passionate ab
 - Antenna Design & Electromagnetic Simulation
 - Satellite Communication & Space Internet Systems
 
-Currently reading *Fundamentals of Applied Electromagnetics* by Ulaby and prepping for my MS at **UT Austin**.
+Currently reading *Fundamentals of Applied Electromagnetics* by Ulaby and prepping for my MS.
 
 [Explore Blog Posts]({{ "/blog/" | relative_url }}) | [Visit Portfolio](https://sahithya2003.vercel.app/)
 
