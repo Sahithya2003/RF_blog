@@ -40,3 +40,7 @@ Connect with me on [LinkedIn](https://linkedin.com/in/sahithya-kattamuri) or exp
 - [{{ post.title }}]({{ post.url | relative_url }})
   _{{ post.date | date: "%B %d, %Y" }}_
 {% endfor %}
+
+
+<!-- 100% privacy-first analytics -->
+<script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
