@@ -53,6 +53,7 @@ defaults:
       comments: false
       share: true
       toc: true
+      favicon: "/assets/images/favicon.ico"
       viewport: width=device-width, initial-scale=1
 
       viewport: width=device-width, initial-scale=1
