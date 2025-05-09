@@ -54,3 +54,12 @@ defaults:
       share: true
       toc: true
       viewport: width=device-width, initial-scale=1
+
+      viewport: width=device-width, initial-scale=1
+
+analytics:
+  provider: "google-gtag"
+  google:
+    tracking_id: "G-QK3D5TG2PE"
+    anonymize_ip: true
+
