@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "Replicating a Beam-Steerable Antenna Array: A Guided Walkthrough on How Beams Are Bent"
+title: "I Built a Beam-Steering Antenna (and It Actually Worked)"
 date: 2025-06-05
 permalink: /phasedarrays
 author_profile: true
