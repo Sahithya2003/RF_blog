@@ -153,7 +153,7 @@ Why? It reflects energy back into the beam and reduces back radiation. Quiet. Ef
 ### Why My Results Don’t Exactly Match the Paper
 ![rad_26](/RF_blog/assets/images/26.png)  
 *Figure 13.* Radiation pattern for +26° beam steering. 
-![rad_30](/RF_blog/assets/images/26.png)  
+![rad_30](/RF_blog/assets/images/30.png)  
 *Figure 13.* Radiation pattern for +30° beam steering. 
 This part matters.
 
