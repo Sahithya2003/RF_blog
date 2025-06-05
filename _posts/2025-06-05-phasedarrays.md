@@ -32,6 +32,8 @@ This particular design solves beam steering using a clever mix of simplicity and
 I set out to replicate their antenna, not only to test their claims but also to peel back each layer — to understand what each component does and how it helps bend the beam.
 
 ### Peeling the Layers: Why This Antenna Looks the Way It Does
+![peeling1](/RF_blog/assets/images/peeling.png)  
+*Figure 1.* Exploded view of the stacked antenna showing patch layer, aperture-coupled ground plane, and feed network with phase shifters.
 
 The antenna uses a stacked design, with two layers of FR4 substrate (each 1.6 mm thick), separated by a ground plane. On top: four square radiating patches. Below: the feeding network with diodes and lines. In the middle: precisely cut slots that couple energy from the feed to the patches.
 
@@ -45,6 +47,9 @@ This isn’t just for aesthetics or space-saving. Here’s why it matters:
 - Cleaner patterns: Isolating the feed prevents it from radiating unwanted energy.
 
 Put simply, the stacked design gives you flexibility, control, and cleaner radiation. And this separation also lowers parasitic coupling and eases impedance tuning across layers.
+
+![array](/RF_blog/assets/images/array.png)  
+*Figure 2.* HFSS model of the full array structure with radiation box and stacked substrate layers.
 
 You’ll notice these slots aren’t random — they’re precisely shaped and placed to direct energy efficiently. This matters a lot when you’re dealing with phase-sensitive beamforming.
 
@@ -65,6 +70,9 @@ Now let’s talk about the heart of the beam steering: the PIN and varactor diod
 This two-level control — discrete switching with PINs, continuous adjustment with varactors — is what makes this design both flexible and cost-effective.
 
 *In the diagram below, the circles represent varactors, and the tiny square elements near phase shifters are the PIN diodes. Each arm of the feed network has a PIN-controlled switch-line phase shifter followed by a varactor.*
+
+![back](/RF_blog/assets/images/back.png)  
+*Figure 3.* Bottom view of the feeding network showing switch-line phase shifters and varactor placement before each patch input.
 
 ### In RF Terms...
 
@@ -91,6 +99,12 @@ This part may look boring, but it’s where the real steering precision comes fr
 ### Simulating the Beam Steering
 
 I set up three main simulation cases:
+![odegreed](/RF_blog/assets/images/0e.png)  
+*Figure 4.* Simulated E-field distribution for the 0° steering case (S0). Equal phase at all ports results in forward-facing main beam.
+![26degreed](/RF_blog/assets/images/26e.png)  
+*Figure 5.* Simulated E-field distribution for the +26° steering case (S3). Signal delay on one side introduces constructive phase shift, steering the beam right.
+![30degrees](/RF_blog/assets/images/30e.png)  
+*Figure 6.* Simulated E-field distribution for the −28° steering case (S4). Phase delay on the opposite side steers the beam to the left.
 
 - **S0 (0°)** — balanced paths, no phase difference  
 - **S3 (+30°)** — one side gets delayed using switch-lines  
@@ -106,21 +120,41 @@ Not quite ±30°, but close — and this is where it gets interesting.
 
 ### The Reflector: Quietly Doing a Lot
 
-At the very bottom of this sandwich sits a **metal reflector**, spaced about 10.8 mm (or λ/5) below the bottom layer. At first, I didn’t think much of it — until I tested the design with and without it.
+At the very bottom of this sandwich sits a **metal reflector**, spaced about 10.8 mm (or λ/5) below the bottom layer. 
 
 **With reflector:**  
 - Reflects backward radiation forward → more gain  
 - Adds constructively → tighter beam  
 - Suppresses back lobes → cleaner pattern
+![rad_with_reflor2](/RF_blog/assets/images/radiation_r.png)  
+*Figure 7.* Simulated radiation pattern with reflector. Forward gain improves and side lobes are suppressed due to constructive reflection.
+![rad_with_reflor](/RF_blog/assets/images/r.png)  
+*Figure 8.* Gain vs. theta plot with reflector. Forward gain is enhanced, and overall beam directivity improves with reduced side lobes.
+![gain2](/RF_blog/assets/images/gain_r.png)  
+*Figure 9.* 3D gain plot with reflector. Peak gain increases to 4.43 dB, with a tighter and more forward-focused beam compared to the case without a reflector.
+
+Didn’t think much of it... until I removed it. Oof.
 
 **Without reflector:**  
 - Side lobes spike  
 - Gain drops by nearly 1.5 dB
+  
+![rad_without_reflor](/RF_blog/assets/images/radiation_wr.png)  
+*Figure 10.* Simulated radiation pattern without the reflector. Beam is distorted with prominent side lobes and reduced forward gain.
+![rad_without_reflor2](/RF_blog/assets/images/wr.png)  
+*Figure 11.* Gain vs. theta plot without reflector. The main lobe is weakened and multiple side lobes appear due to lack of constructive reflection.
+![gain](/RF_blog/assets/images/gain_wr.png)  
+*Figure 12.* 3D gain plot of the antenna array showing directional radiation with a peak gain of 3.26 dB at 6.2 GHz. Red lobe indicates the main beam direction.
+
+Why? It reflects energy back into the beam and reduces back radiation. Quiet. Effective. Absolutely necessary.
 
 **Conclusion:** Quiet. Effective. Absolutely necessary.
 
 ### Why My Results Don’t Exactly Match the Paper
-
+![rad_26](/RF_blog/assets/images/26.png)  
+*Figure 13.* Radiation pattern for +26° beam steering. 
+![rad_30](/RF_blog/assets/images/26.png)  
+*Figure 13.* Radiation pattern for +30° beam steering. 
 This part matters.
 
 - **Mutual coupling**: The patches are close together. They interact.
@@ -128,6 +162,8 @@ This part matters.
 - **FR4 losses**: Real materials aren’t perfect.
 - **Static diode modeling**: I used ideal switches, not full nonlinear models.
 - **Reflector spacing**: λ/5 is sensitive. A mm off can mess things up.
+
+PS: Yeah, I placed my antenna the other way around — so in all my polar plots, what should’ve been 0° shows up at 180°, and +30° shows up at 150°. But you get it right?  180 − 180 = 0°, and 180 − 150 = 30°. Math still maths. Beam still beams. We move.
 
 ### What These Results Show
 
